@@ -7,9 +7,9 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import models.Armazem.Ocupacao;
 import models.Armazem.QuantidadeDeOrdens;
 import models.Armazem.SaldoDeEstoque;
-import models.Armazem.Ocupacao;
 import servicos.ClientesXML;
 
 

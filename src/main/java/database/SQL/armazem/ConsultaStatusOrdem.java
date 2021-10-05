@@ -113,7 +113,7 @@ public class ConsultaStatusOrdem {
                 dataCadastro = LocalDateTime.parse(resultSet.getString("CADASTRADA"),formato).format(formatoData);
             }
 
-            StatusOrdem statusOrdem = new StatusOrdem(
+             StatusOrdem statusOrdem = new StatusOrdem(
                     resultSet.getInt("HANDLE"),
                     resultSet.getInt("STATUS"),
                     resultSet.getInt("ORDEM"),
