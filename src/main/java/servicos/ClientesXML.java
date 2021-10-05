@@ -26,7 +26,7 @@ import java.util.List;
 public class ClientesXML {
     private static final File file = new File("src/main/configXml/clientes.xml");
     private static final List<Ocupacao> ocupacaoList = new ArrayList<>();
-    private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+    private static final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
     public static ArrayList<Ocupacao> carregarDadosDoCliente(int CLIENTE) {
         ArrayList<Ocupacao> taxaOcupacao = new ArrayList<>();
@@ -67,13 +67,13 @@ public class ClientesXML {
         return taxaOcupacao;
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         try {
             ocupacao();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     public static void ocupacao() throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -101,14 +101,20 @@ public class ClientesXML {
     }
 
     public static void criarDadosDoCliente() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String hoje = LocalDate.now().format(formatter);
 
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         Document doc = documentBuilder.parse(file);
         NodeList nodeList = doc.getDocumentElement().getElementsByTagName("cliente");
         NodeList tagCliente = doc.getElementsByTagName("clientes");
 
+        String dataAtualizacao = tagCliente.item(0).getChildNodes().item(1).getTextContent();
 
         for (Ocupacao ocupacao : ocupacaoList) {
+            if(dataAtualizacao.equals(hoje)){
+                break;
+            }
             int salvar = existCliente(ocupacao.getID());
 
             Element dataOcupacaoCliente = doc.createElement("data");
@@ -139,7 +145,7 @@ public class ClientesXML {
                 System.out.println("nao tem  " + ocupacao.getID());
             }
         }
-
+        tagCliente.item(0).getChildNodes().item(1).setTextContent(hoje);
         String arquivo = converter(doc);
         salvarArquivo(arquivo);
 
