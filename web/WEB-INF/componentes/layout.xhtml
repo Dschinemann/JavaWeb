@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: diego
+  Date: 07/07/2021
+  Time: 10:41
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://kit.fontawesome.com/faea4c5da1.js" type="application/javascript"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="shortcut icon" href="#{resource['default/6_1_6/images/logo.png']}" />
+    <h:outputStylesheet library="default" name="css/container.css"/>
+    <h:outputStylesheet library="default" name="css/content.css"/>
+    <h:outputStylesheet library="default" name="css/header.css"/>
+    <h:outputStylesheet library="default" name="css/menu.css"/>
+    <h:outputStylesheet library="default" name="css/table.css"/>
+    <h:outputStylesheet library="default" name="css/modal.css"/>
+    <h:outputStylesheet library="default" name="css/footer.css"/>
+    <h:outputStylesheet library="default" name="css/regrassla.css"/>
+    <h:outputStylesheet library="default" name="css/spinner.css"/>
+    <h:outputStylesheet library="default" name="css/armazenagem.css"/>
+    <h:outputStylesheet library="default" name="css/ordem.css"/>
+
+    <h:outputStylesheet library="default" name="mobile/home.css"/>
+    <h:outputStylesheet library="default" name="mobile/mobileArmazem.css"/>
+    <h:outputStylesheet library="default" name="mobile/mobileCargasDescargas.css"/>
+    <title>Contlog</title>
+</h:head>
+
+<h:body>
+    <ui:insert name="menu">
+        <ui:include src="menu.xhtml"/>
+    </ui:insert>
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+        <ui:insert name="conteudo">
+            <ui:include src="conteudo.xhtml"/>
+        </ui:insert>
+</h:body>
+<h:outputScript library="default" name="js/menu.js"/>
+<h:outputScript library="default" name="js/background.js"/>
+</html>

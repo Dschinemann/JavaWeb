@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      lang="pt-BR">
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Language" content="pt-br"/>
+    <title>Contlog</title>
+</h:head>
+<f:view>
+    <h:body>
+        <ui:composition template="../../../../WEB-INF/componentes/layout.xhtml">
+            <ui:define name="header">
+                <div class="menuButton">
+                    <div class="iconmennu one">
+                        <span id="one">
+                            <i id="showmenu" class="fa-solid fa-bars fa"/>
+                            <input class="input" type="checkbox" id="togle"/>
+                        </span>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:define name="conteudo">
+                <div id="containerDash" class="armazenagem">
+                    <div class="boxes">
+                        <h:form class="dashboardHead" id="two">
+                            <h:commandLink onclick="saldoDoBox(1)" class="dashBox box1">
+                                <h1>Saldo Total un.</h1>
+                                <h:outputText value="#{estoqueArmazem.SALDOTOTAL}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                                <f:ajax render="tableForm btn_exportar_saldo spinner-modal"
+                                        listener="#{estoqueArmazem.estoqueCategoria('total')}"/>
+                            </h:commandLink>
+                            <h:commandLink class="dashBox box1">
+                                <h1>Ocupação hoje.</h1>
+                                <h:outputText value="#{estoqueArmazem.ocupacaoHoje} PP" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                            </h:commandLink>
+                            <h:commandLink styleClass="dashBox box2" onclick="saldoDoBox(2)">
+                                <h1>Saldo Disponível un.</h1>
+                                <h:outputText value="#{estoqueArmazem.SALDODISPONIVEL}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                                <f:ajax render="tableForm btn_exportar_saldo spinner-modal"
+                                        listener="#{estoqueArmazem.estoqueCategoria('disponivel')}"/>
+                            </h:commandLink>
+                            <h:commandLink onclick="saldoDoBox(3)" styleClass="dashBox box3">
+                                <h1>Saldo Bloqueado un.</h1>
+                                <h:outputText value="#{estoqueArmazem.SALDOBLOQ}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                                <f:ajax render="tableForm btn_exportar_saldo spinner-modal"
+                                        listener="#{estoqueArmazem.estoqueCategoria('bloqueado')}"/>
+                            </h:commandLink>
+                            <h:commandLink onclick="saldoDoBox(4)" class="dashBox box4">
+                                <h1>Saldo Avaria un.</h1>
+                                <h:outputText value="#{estoqueArmazem.SALDOAVA}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                                <f:ajax render="tableForm btn_exportar_saldo spinner-modal"
+                                        listener="#{estoqueArmazem.estoqueCategoria('ava')}"/>
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                    <div class="conteudoDash">
+                        <div class="dash1">
+                            <div class="graph1" id="curve_chart"></div>
+                            <div class="drawtable movimentacao">
+                                <h:dataTable styleClass="drawTable_dash1"
+                                             value="#{estoqueArmazem.quantidadeDeOrdens}"
+                                             var="ordem"
+                                >
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="MÊS"/>
+                                        </f:facet>
+                                        <h:outputText value="#{ordem.mes}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ENTRADA"/>
+                                        </f:facet>
+                                        <h:outputText value="#{ordem.ENTRADAS}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="SAIDA"/>
+                                        </f:facet>
+                                        <h:outputText value="#{ordem.SAIDAS}"/>
+                                        <h:outputText/>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                        <div class="dash2">
+                            <div class="chart1">
+                                <div class="drawtable conciliacao">
+                                    <table class="drawTable_dash1">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">ITEM</th>
+                                            <th scope="col">SALDO CONTLOG</th>
+                                            <th scope="col">SALDO CLIENTE</th>
+                                            <th scope="col">DIF.</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pieCharts1">
+                                    <span class="span_dash">Saldo Conciliado</span>
+                                    <div id="piechart"></div>
+                                </div>
+                            </div>
+                            <div class="chart2">
+                                <div class="drawtable acuracidade">
+                                    <table class="drawTable_dash1">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">MÊS</th>
+                                            <th scope="col">ACURACIDADE</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pieCharts1">
+                                    <span class="span_dash">Último Inventário</span>
+                                    <div id="piechart1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dash3">
+                            <div class="graph1" id="curve_chart1"></div>
+                            <div class="drawtable movimentacao">
+                                <h:dataTable styleClass="drawTable_dash1"
+                                             value="#{estoqueArmazem.ocupacaoMes}" var="ocup"
+                                >
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="MÊS"/>
+                                        </f:facet>
+                                        <h:outputText value="#{ocup.dataOcupacao}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="TOTAL"/>
+                                        </f:facet>
+                                        <h:outputText value="#{ocup.OCUPACAOPP}"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                        <div class="dash4">
+                            <div class="graph1" id="curve_chart2"></div>
+                            <div class="drawtable movimentacao">
+                                <h:dataTable
+                                        styleClass="drawTable_dash1"
+                                        value="#{estoqueArmazem.ocupacaoArrayList}"
+                                        var="ocupacao"
+                                >
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="DIA"/>
+                                        </f:facet>
+                                        <h:outputText value="#{ocupacao.dataOcupacao}"/>
+                                        <h:outputText/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="QUANTIDADE PP"/>
+                                        </f:facet>
+                                        <h:outputText value="#{ocupacao.OCUPACAOPP}"/>
+                                        <h:outputText/>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal" class="box">
+                    <h:form id="tableForm">
+                        <h:panelGroup id="spinner-modal" rendered="#{estoqueArmazem.SHOWLOADING}">
+                            <div class="loader-modal">
+                                <div class="lds-facebook">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                        <div class="cntrprocura">
+                            <div class="procura">
+                                <div>
+                                    <h:inputText id="procurar_item" styleClass="textprocura"
+                                                 a:placeholder="Procurar item" onkeyup="limparDados('item')"/>
+                                    <input type="button" onclick="procurarItem()" value="Procurar"/>
+                                </div>
+                                <div>
+                                    <h:inputText onkeyup="limparDados('lote')" id="procurar_lote"
+                                                 styleClass="textprocura" a:placeholder="Lote"/>
+                                    <input type="button" onclick="procurarLote()" value="Procurar"/>
+                                </div>
+                                <div>
+                                    <h:inputText onkeyup="limparDados('nf')" id="procurarNF" styleClass="textprocura"
+                                                 a:placeholder="Nota fiscal"/>
+                                    <input type="button" onclick="procurarNF()" value="Procurar"/>
+                                </div>
+                            </div>
+                            <div>
+                                <h:commandButton
+                                        id="fecharmodal"
+                                        onclick="fecharModalSaldo()"
+                                        class="Fechar"
+                                        type="button"
+                                        value="Fechar"
+                                >
+                                    <f:ajax
+                                            execute="tableForm"
+                                            render="tableForm btn_exportar_saldo spinner-modal"
+                                            listener="#{estoqueArmazem.estoqueCategoria('limpar')}"
+                                    />
+                                </h:commandButton>
+                                <h:commandButton
+                                        type="button"
+                                        onclick="exportTableToExcel('tableForm:tabelaModal','Saldo')"
+                                        class="exportar_saldo"
+                                        value="Exportar saldo"
+                                        id="btn_exportar_saldo"
+                                        rendered="#{estoqueArmazem.SHOWBUTTON}"/>
+                            </div>
+                        </div>
+                        <div style="overflow: auto;margin: 5px;">
+                            <h:dataTable id="tabelaModal"
+                                         styleClass="tablemodal"
+                                         value="#{estoqueArmazem.saldoCategoria}"
+                                         var="estoque">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PRODUTO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.produto}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DESCRIÇÃO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.descricaoProduto}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="LOTE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.lote}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NOTAFISCAL"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.NOTAFISCAL}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="EMISSÃO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.dataEmissao}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="VALIDADE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.validade}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TOTAL"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.TOTAL}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DISPONIVEL"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.DISPONIVEL}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="RESERVADO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.RESERVADO}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="BLOQUEADO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.BLOQUEADO}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PESOBRUTO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.PESOBRUTO}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="VALORDAMERCADORIA"/>
+                                    </f:facet>
+                                    <h:outputText value="#{estoque.VALORDAMERCADORIA}">
+                                        <f:convertNumber type="currency" locale="pt-BR"/>
+                                    </h:outputText>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </h:form>
+                </div>
+                <h:outputScript library="default" name="js/armazem.js"/>
+                <h:outputScript>
+                    const array = [
+                    ['Mês', 'Entradas', 'Saídas'],
+                    <ui:repeat value="#{estoqueArmazem.quantidadeDeOrdens}" var="ordem">
+                        ["#{ordem.mes}",#{ordem.ENTRADAS},#{ordem.SAIDAS}],
+                    </ui:repeat>
+                    ];
+                    const arrayOcupacaoMes = [
+                    ['MÊS', 'OCUPAÇÃO'],
+                    <ui:repeat value="#{estoqueArmazem.ocupacaoMes}" var="ocup">
+                        ["#{ocup.dataOcupacao}","#{ocup.OCUPACAOPP}"],
+                    </ui:repeat>
+                    ];
+                    const arrayOcupDiario = [
+                    ['DIA', 'OCUPAÇÃO'],
+                    <ui:repeat value="#{estoqueArmazem.ocupacaoArrayList}" var="ocup">
+                        ["#{ocup.dataOcupacao}","#{ocup.OCUPACAOPP}"],
+                    </ui:repeat>
+                    ];
+                </h:outputScript>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

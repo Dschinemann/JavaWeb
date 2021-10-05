@@ -1,0 +1,25 @@
+.footer{
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    margin: 1vh 5vw 0 1vw;
+    align-self: normal;
+}
+
+.pagina{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagina input{
+    width: 2vw ;
+    margin: 0 1.5vw;
+    height: 2vw;
+    cursor: pointer;
+}
+
+.arrowleft{
+    transform: rotate(180deg);
+    color: black;
+}

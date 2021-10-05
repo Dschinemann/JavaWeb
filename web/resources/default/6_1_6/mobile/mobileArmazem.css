@@ -1,0 +1,31 @@
+@media only screen and (max-width: 700px) {
+    .boxes {
+        display: none;
+    }
+
+    .conteudoDash {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        margin-top: 50px;
+        justify-content: space-between;
+    }
+
+    .dash1, .dash2,.dash3,.dash4 {
+        flex-direction: column;
+        max-height: fit-content !important;
+        padding: 5px;
+        background-color: white;
+        border-bottom: 1px solid black;
+    }
+    .dash4{
+        border: none;
+    }
+
+    .graph1 {
+        width: auto;
+    }
+    .movimentacao{
+        margin-top: 16px;
+    }
+}

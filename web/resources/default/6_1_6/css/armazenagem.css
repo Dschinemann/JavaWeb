@@ -1,0 +1,227 @@
+
+.menuButton{
+    padding: 8px;
+}
+.iconmennu{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+}
+.armazenagem{
+    display: flex;
+    flex-direction: column;
+    padding: 0 5vw 0  5vw;
+}
+.dashboardHead{
+    display: flex;
+    justify-content: space-between;
+}
+.dashBox{
+    background-color:  rgba(211, 211, 255,1);
+    width: 20vw;
+    min-height: 15vh;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0.4em 0.4em rgba(0,0,0,.7);
+    border-style: none;
+    font-family: 'Fira Sans', sans-serif;
+    text-decoration: none;
+}
+.dashBox:hover{
+    cursor: pointer;
+    background-color: rgb(29, 29, 73);
+    color: #fff;
+}
+.dashBox span {
+    font-size: 2rem;
+    font-weight: bold;
+    align-self: center;
+}
+.box1{
+    color: rgb(0, 0, 0);
+}
+.box2{
+    color: rgb(0, 114, 6);
+}
+.box3{
+    color: rgb(241, 1, 1);
+}
+.box4{
+    color: rgb(0, 9, 134);
+}
+.buttonSaldo{
+    background-color: #d3d3ff;
+    outline: none;
+    border-style: none;
+    border-radius: 5px;
+}
+
+.tableDash th {
+    font-size : 0.6rem;
+    background: blue;
+    color     : rgb(238, 234, 226);
+    padding   : 8px;
+}
+
+.tableDash td {
+    font-size: 0.6rem;
+    padding  : 8px;
+}
+.conteudoDash1{
+    display: flex;
+    justify-content: space-between;
+}
+/*.graphPie{
+    width: 50vw;
+    display: flex;
+    max-height: 35vh;
+    margin-top: 5px;
+    align-items: center;
+    background-color: #2c405f;
+    height: 100%;
+}*/
+.conteudoDash {
+    display       : flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 16px;
+    justify-content: space-between;
+}
+
+.dash1 {
+    display         : flex;
+    background-color: #2c405f;
+    max-height          : 35vh;
+    padding         : 10px;
+    border-radius   : 5px 5px 0 0;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+.dash2 {
+    /*display         : flex;*/
+    background-color: #2c405f;
+    max-height          : 35vh;
+    padding         : 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+    display: none;
+}
+
+.dash3 {
+    display         : flex;
+    background-color: #2c405f;
+    max-height          : 35vh;
+    padding         : 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+}
+.dash4 {
+    display         : flex;
+    background-color: #2c405f;
+    max-height          : 35vh;
+    padding         : 10px;
+    border-radius   : 0 0 5px 5px;
+    justify-content: space-between;
+}
+
+.graph1 {
+    width: 69vw;
+    background-color: wheat;
+}
+
+.drawTable_dash1 {
+    background-color: aliceblue;
+    max-width: 30vw;
+    min-width: 16vw;
+}
+
+.drawTable_dash1 th {
+    font-size : 0.6rem;
+    background: blue;
+    color     : rgb(238, 234, 226);
+    padding   : 5px;
+}
+
+.drawTable_dash1 td {
+    font-size: 0.6rem;
+    padding  : 8px;
+}
+
+.drawtable {
+    overflow: auto;
+    height: 100%;
+}
+
+.drawtable::-webkit-scrollbar-track {
+    box-shadow      : inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+.drawtable::-webkit-scrollbar {
+    width           : 10px;
+    background-color: #F5F5F5;
+}
+
+.drawtable::-webkit-scrollbar-thumb {
+    background-color: #0ae;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%,
+    color-stop(.5, rgba(255, 255, 255, .2)),
+    color-stop(.5, transparent), to(transparent));
+}
+
+.chart1{
+    display: flex;
+}
+.chart2{
+    display: flex;
+}
+.conciliacao{
+    max-width: 35vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.acuracidade{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vw;
+}
+.movimentacao{
+    max-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pieCharts1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.span_dash{
+    color: ivory;
+}
+.pieCharts1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.exportar_saldo{
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 10px;
+
+}
+.exportar_saldo:hover{
+    color: white;
+}

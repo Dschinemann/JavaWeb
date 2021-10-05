@@ -1,0 +1,45 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: diego
+  Date: 07/07/2021
+  Time: 10:34
+-->
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <div id="menuitens" class="menu">
+        <h:form id="formmenu">
+            <div class="menuheader" id="menuheader">
+                <div class="header-logo">
+                    <h:graphicImage styleClass="logo" library="default" name="images/logo.png" alt="logo"/>
+                    <i id="togle-voltar" class="voltar-menu fas fa-angle-double-left"/>
+                </div>
+                <div>
+                    <input class="input" type="checkbox" id="togle"/>
+                    <span>Contlog</span>
+                </div>
+            </div>
+            <ul class="listmain">
+                <ui:repeat value="#{menuBean.menuItem(login.usuario.HANDLE)}" var="menu">
+                    <li class="sublist list">
+                        <div>
+                            <div class="input titulo-lista">
+                                <h:outputText value="#{menu.descricao}"/>
+                            </div>
+                        </div>
+                        <ul>
+                            <ui:repeat value="#{menuBean.subMenuItem(menu.HANDLE,login.usuario.HANDLE)}" var="subMenu">
+                                <li class="list">
+                                    <h:commandButton
+                                            action="#{menuBean.navegar(subMenu.comando)}"
+                                            value="#{subMenu.titulo}"
+                                            styleClass="input">
+                                    </h:commandButton>
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </li>
+                </ui:repeat>
+            </ul>
+        </h:form>
+    </div>
+</ui:composition>

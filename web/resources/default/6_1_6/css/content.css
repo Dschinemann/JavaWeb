@@ -1,0 +1,8 @@
+#tabelas {
+    transition: transform 1.5s;
+}
+
+#tabelas div {
+    overflow: auto;
+    height: 65vh;
+}

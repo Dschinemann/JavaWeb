@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      lang="pt-BR">
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Contlog</title>
+</h:head>
+<f:view>
+    <h:body styleClass="body_ordens">
+        <ui:composition template="../../../../WEB-INF/componentes/layout.xhtml">
+            <ui:define name="header">
+                <div class="menuButton">
+                    <div class="iconmennu one">
+                        <span id="one">
+                            <i id="showmenu" class="fa-solid fa-bars fa"/>
+                            <input class="input" type="checkbox" id="togle"/>
+                        </span>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:define name="conteudo">
+                <div id="containerBoxes" class="armazenagem">
+                    <div>
+                        <h:form class="dashboardHead" id="two">
+                            <h:commandLink onclick="saldoDoBox2(1)" class="dashBox box1" >
+                                <h1>Total de Pedidos enviados.</h1>
+                                <h:outputText value="#{ordemArmazem.TOTALPEDIDOS}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                            </h:commandLink>
+
+                            <h:commandLink class="dashBox box1">
+                                <h1>Pedidos em separação.</h1>
+                                <h:outputText value="#{ordemArmazem.PSEPARACAO}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                            </h:commandLink>
+
+                            <h:commandLink class="dashBox box1">
+                                <h1>Pedidos Aguardando Carregamento</h1>
+                                <h:outputText value="#{ordemArmazem.PAGUARDANDOCARREGAMENTO}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                            </h:commandLink>
+
+                            <h:commandLink styleClass="dashBox box2">
+                                <h1>Total de Pedidos Finalizados</h1>
+                                <h:outputText value="#{ordemArmazem.PFINALZADOS}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                            </h:commandLink>
+
+                            <h:commandLink styleClass="dashBox box3">
+                                <h1>Total de Pedidos Cancelados</h1>
+                                <h:outputText value="#{ordemArmazem.PCANCELADOS}" lang="pt-BR">
+                                    <f:convertNumber pattern="#,##0" locale="pt_BR"/>
+                                </h:outputText>
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                </div>
+                <div class="container">
+                    <ui:repeat value="#{ordemArmazem.statusOrdemsAbertas}" var="ordens">
+                        <div style="margin-top: 16px;font-stretch: ultra-condensed;">
+                            <ul class="timeline">
+                                <li class="listaOrdens">
+                                    <div>
+                                        <span>Pedido</span>
+                                        <span>#{ordens.pedido}</span>
+                                    </div>
+                                    <div>
+                                        <span>Nota Fiscal</span>
+                                        <span>#{ordens.notaFiscal}</span>
+                                    </div>
+                                    <div>
+                                        <span>STATUS </span>
+                                        <span>#{ordens.statusNome}</span>
+                                    </div>
+                                </li>
+                                <li class="#{empty ordens.dataCadastro ? 'li':'li complete'}">
+                                    <div class="timestamp">
+                                        <span class="author">Pedido Cadastrado</span>
+                                        <span class="date">#{ordens.dataCadastro}</span>
+                                    </div>
+                                    <div class="status">
+                                        <h4></h4>
+                                    </div>
+                                </li>
+                                <li class="#{ empty ordens.inicioSeparacao ? 'li':'li complete'}">
+                                    <div class="timestamp">
+                                        <span class="author">Separação Finalizada.</span>
+                                        <span class="date">#{empty ordens.inicioSeparacao ? " AG " : ordens.inicioSeparacao }</span>
+                                    </div>
+                                    <div class="status">
+                                        <h4></h4>
+                                    </div>
+                                </li>
+                                <li class="#{ empty ordens.aguardandoCarregamento ? 'li':'li complete'}">
+                                    <div class="timestamp">
+                                        <span class="author">Conferência Finalizada</span>
+                                        <span class="date">#{empty ordens.aguardandoCarregamento ? " AG " : ordens.aguardandoCarregamento}</span>
+                                    </div>
+                                    <div class="status">
+                                        <h4></h4>
+                                    </div>
+                                </li>
+                                <li class="#{ empty ordens.carregado ? 'li':'li complete'}">
+                                    <div class="timestamp">
+                                        <span class="author">Aguardando Embarque</span>
+                                        <span class="date">#{empty ordens.carregado ? " AG " : ordens.carregado}</span>
+                                    </div>
+                                    <div class="status">
+                                        <h4></h4>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </ui:repeat>
+                </div>
+
+                <div id="modal" class="box">
+                    <h:form id="tableForm">
+                        <h:panelGroup id="spinner-modal" rendered="false">
+                            <div class="loader-modal">
+                                <div class="lds-facebook">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                        <div class="cntrprocura">
+                            <div class="procura">
+                                <div>
+                                    <h:inputText id="pesquisa_pedido" styleClass="textprocura"
+                                                 a:placeholder="Procurar pedido"/>
+                                    <input type="button" onclick="procurarPedido()" value="Procurar"/>
+                                </div>
+                                <div>
+                                    <h:inputText id="pesquisa_nota" styleClass="textprocura"
+                                                 a:placeholder="Nota Fiscal"/>
+                                    <input type="button" onclick="procurarNotaDaOrdem()" value="Procurar"/>
+                                </div>
+                            </div>
+                            <div>
+                                <h:commandButton
+                                        id="fecharmodal"
+                                        onclick="fecharModalOrdem()"
+                                        class="Fechar"
+                                        type="button"
+                                        value="Fechar"
+                                >
+                                </h:commandButton>
+                                <h:commandButton
+                                        type="button"
+                                        onclick="exportTableToExcel('tableForm:tabelaModal','ordem')"
+                                        class="exportar_saldo"
+                                        value="Exportar saldo"
+                                        id="btn_exportar_saldo"
+                                />
+                            </div>
+                        </div>
+                        <div style="overflow: auto;margin: 5px;">
+                            <h:dataTable id="tabelaModal"
+                                         styleClass="tablemodal"
+                                         value="#{ordemArmazem.statusOrdems}"
+                                         var="ordem">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ORDEM"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.NUMEROORDEM}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="STATUS"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.statusNome}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PEDIDO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.pedido}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NF"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.notaFiscal}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CADASTRO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.dataCadastroFormat}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                            <h:outputText value="DATA ENCERRAMENTO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.dataHoraOrdemEncerrada}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TRANSPORTADORA"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.transportadora}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CLIENTE FINAL"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.clienteFinal}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="LOCAL ENTREGA"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.localEntrega}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ESTADO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.estado}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="MUNICIPIO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.municipio}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </h:form>
+                </div>
+                <h:outputScript library="default" name="js/ordem.js"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+    <h:outputScript library="default" name="js/menu.js"/>
+</f:view>
+</html>

@@ -1,0 +1,31 @@
+@media only screen and (min-width: 360px) and (max-width: 700px) {
+    *{
+        font-size: 20px !important;
+    }
+    .menu {
+        width: 100%;
+        transform: translateX(0);
+    }
+    .menuheader{
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menuheader span {
+        font-size: 50px !important;
+    }
+    .voltar-menu{
+        display: block;
+        margin-right: 25px;
+        font-size: 30px !important;
+        color: white;
+        cursor: pointer;
+    }
+
+    .header-logo{
+        flex-direction: row !important;
+        width: 100%;
+    }
+
+}

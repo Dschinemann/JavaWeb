@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</h:head>
+<f:view>
+    <h:body>
+        <ui:composition template="../../WEB-INF/componentes/layout.xhtml">
+            <ui:define name="header">
+                <div id="header">
+                    <div class="one">
+                        <span id="one">
+                            <i id="showmenu" class="fa-solid fa-bars fa"/>
+                            <input class="input" type="checkbox" id="togle"/>
+                        </span>
+                    </div>
+                    <div id="two">
+                        <h:form>
+                            <h:message for="inputOrdem" style="color: red"/>
+                            <h:inputText id="inputOrdem"
+                                         value="#{tabelaCubagem.ordemDoFiltro}"
+                                         a:placeholder="Ordem"
+                                         required="true"/>
+                            <h:commandButton styleClass="btn" value="Procurar Ordem" onclick="showTable()">
+                                <f:ajax listener="#{tabelaCubagem.consultarOrdem()}"
+                                        execute="inputOrdem"
+                                        render="formModal tabelaModal "/>
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:define name="conteudo">
+                <div id="tabelas">
+                    <div>
+                        <h:form id="tabelaprincipal">
+                            <h:dataTable styleClass="ordem" value="#{tabelaCubagem.ordems}" var="ordem">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ORDEM"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.ORDEM}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ICONE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.ICONE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="STATUS"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.STATUS}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CLIENTE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.CLIENTE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ITEM"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.ITEM}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="QUANTIDADE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.QUANTIDADE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="METRAGEMCUBICA"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.METRAGEMCUBICA}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.DE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PARA"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.PARA}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="UN_CONVERSAO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.UN_CONVERSAO}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NOME"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.NOME}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DESCRICAO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.DESCRICAO}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TOTAL_CUBICO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.TOTAL_CUBICO}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+
+                <h:form styleClass="footer">
+                    <div>
+                        <h:commandButton value="exporta CSV"/>
+                    </div>
+                    <div class="pagina">
+                        <h:outputLabel id="pagina">Registros #{tabelaCubagem.quantRegistro}</h:outputLabel>
+                        <div>
+                            <!-- <h:commandButton styleClass="arrowleft voltar">
+                                <f:ajax/>
+                            </h:commandButton>
+                            <!-<input class="arrowleft" type="image" value="Voltar" src="../images/next.png"/> -->
+                        </div>
+                        <div>
+                            <h:commandButton styleClass="proximo" value="+">
+                                <f:ajax listener="#{tabelaCubagem.proximaPagina()}" render="pagina tabelaprincipal"/>
+                            </h:commandButton>
+                            <!--<input type="image" value="Próximo" src="../images/next.png"/>-->
+                        </div>
+                    </div>
+                </h:form>
+
+                <div id="modal" class="box">
+                    <h:form id="formModal">
+                        <div>
+                            <h:dataTable styleClass="tablemodal"
+                                         id="tabelaModal"
+                                         value="#{tabelaCubagem.ordemFiltrada}"
+                                         var="ordem"
+                            >
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ORDEM"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.ORDEM}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ICONE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.ICONE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="STATUS"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.STATUS}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CLIENTE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.CLIENTE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ITEM"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.ITEM}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="QUANTIDADE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.QUANTIDADE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="METRAGEMCUBICA"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.METRAGEMCUBICA}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.DE}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PARA"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.PARA}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="UN_CONVERSAO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.UN_CONVERSAO}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NOME"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.NOME}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DESCRICAO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.DESCRICAO}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TOTAL_CUBICO"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ordem.TOTAL_CUBICO}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                        <div>
+                            <h:form>
+                                <h:commandButton
+                                        onclick="fecharModal()"
+                                        styleClass="fechar"
+                                        value="fechar">
+                                    <f:ajax listener="#{tabelaCubagem.fecharModal}" render="modal"/>
+                                </h:commandButton>
+
+                                <!--<input id="fecharmodal" class="fechar" type="button" value="fechar"/>-->
+                                <span>Volume da Ordem: #{tabelaCubagem.cubagemDaOrdemFiltrada} m³</span>
+                            </h:form>
+                        </div>
+                    </h:form>
+                </div>
+                <h:outputScript library="default" name="js/cubagem.js"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

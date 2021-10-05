@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</h:head>
+<f:view>
+    <h:body>
+       <ui:composition template="../../WEB-INF/componentes/layout.xhtml">
+           <ui:define name="header">
+               <div id="header">
+                   <div class="one">
+                        <span id="one">
+                            <i id="showmenu" class="fa-solid fa-bars fa"/>
+                            <input class="input" type="checkbox" id="togle"/>
+                        </span>
+                   </div>
+                   <div id="two">
+                       <div class="exemplo">
+                           <h1>Exemplo</h1>
+                           <div>
+                               <table class="tabelaexemplo">
+                                   <thead>
+                                   <tr>
+                                       <th>Cliente</th>
+                                       <th>Tipo de Operação</th>
+                                       <th>Ordem</th>
+                                       <th>Status da Ordem</th>
+                                       <th>Dta Inclusão</th>
+                                       <th>Dta Finalização</th>
+                                       <th>Sla</th>
+                                       <th>Prazo extendido</th>
+                                       <th>Status Sla</th>
+                                   </tr>
+                                   </thead>
+                                   <tbody>
+                                   <tr>
+                                       <td>I2go</td>
+                                       <td>Saída</td>
+                                       <td>88308</td>
+                                       <td>Encerrada</td>
+                                       <td><h:inputText id="sdtinclusao" a:type="datetime-local" value="2021-07-15T00:00"/></td>
+                                       <td><h:inputText id="shrfinal" a:type="datetime-local" value="2021-07-15T00:00"/></td>
+                                       <td>Expedição D+0</td>
+                                       <td>0</td>
+                                       <td>Não definido</td>
+                                   </tr>
+                                   <tr>
+                                       <td>I2go</td>
+                                       <td>Entrada</td>
+                                       <td>88308</td>
+                                       <td>Encerrada</td>
+                                       <td><h:inputText id="edtinclusao" a:type="datetime-local" value="2021-07-15T00:00"/></td>
+                                       <td><h:inputText id="ehrfinalizacao" a:type="datetime-local" value="2021-07-15T00:00"/></td>
+                                       <td>Entrada D+0</td>
+                                       <td>0</td>
+                                       <td>Não definido</td>
+                                   </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </ui:define>
+          <ui:define name="conteudo">
+              <div class="formsla">
+                  <h:form id="formregrasla">
+                      <div class="cliente">
+                          <div>
+                              <div>
+                                  <label>Cliente</label>
+                                  <h:inputText id="cliente" a:placeholder="Cliente"/>
+                              </div>
+                              <div>
+                                  <label>Regime Fiscal</label>
+                                  <h:inputText a:placeholder="Regime Fiscal"/>
+                              </div>
+                              <div>
+                                  <label>Tipo de integração</label>
+                                  <h:inputText a:placeholder="Tipo de integração"/>
+                              </div>
+                          </div>
+                          <div class="etiquetas">
+                              <div class="radioButtons">
+                                  <label>Etiquetagem</label>
+                                  <h:selectOneRadio>
+                                      <f:selectItem itemValue="teste 1 " itemLabel="SIM"/>
+                                      <f:selectItem itemValue="teste 2 " itemLabel="NÃO"/>
+                                  </h:selectOneRadio>
+                              </div>
+                              <div>
+                                  <label>Adicionar Prazo</label>
+                                  <h:inputText id="prazoetq" a:placeholder="Dias"/>
+                              </div>
+                              <div>
+                                  <label>Adicionar Prazo no movimento de:</label>
+                                  <h:inputText id="tipomov" a:placeholder="Saída"/>
+                              </div>
+                              <div>
+                                  <label>Responsável PCM</label>
+                                  <h:inputText a:placeholder="Pcm"/>
+                              </div>
+                          </div>
+                      </div>
+                      <h1>SLA recebimento</h1>
+                      <div class="recebimento">
+                          <div>
+                              <div>
+                                  <label>Segmento</label>
+                                  <h:inputText a:placeholder="Segmento"/>
+                              </div>
+                              <div>
+                                  <label>Max. Descarga/dia</label>
+                                  <h:inputText a:placeholder="Max. Descarga/dia"/>
+                              </div>
+                              <div>
+                                  <label>Adicionar Prazo</label>
+                                  <h:inputText id="prazorec" a:placeholder="Dias"/>
+                                  <label style="color: white; margin-left: 8px; align-self: center;">Dias</label>
+                              </div>
+                          </div>
+                          <div>
+                              <div>
+                                  <label>Prazo</label>
+                                  <h:inputText id="prazo" a:placeholder="Prazo"/>
+                              </div>
+                              <div>
+                                  <label>Premissa</label>
+                                  <h:inputText a:placeholder="Premissa"/>
+                              </div>
+                              <div>
+                                  <label>Último horário de recebimento</label>
+                                  <h:inputText id="hrreceb" a:type="time" a:placeholder="Horário de corte" value="00:00"/>
+                              </div>
+                          </div>
+                      </div>
+                      <h1>Expedição</h1>
+                      <div class="expedicao">
+                          <div>
+                              <div>
+                                  <label>Prazo expedição</label>
+                                  <h:inputText id="prazoexp"  a:placeholder="Prazo expedição"/>
+                              </div>
+                              <div>
+                                  <label>Máx. Pedidos</label>
+                                  <h:inputText a:placeholder="Máx. Pedidos"/>
+                              </div>
+                          </div>
+                          <div>
+                              <div>
+                                  <label>Horário de corte</label>
+                                  <h:inputText id="hrcorte" a:type="time" a:placeholder="Horário de corte" value="00:00"/>
+                              </div>
+                              <div>
+                                  <label>Adicionar Prazo</label>
+                                  <h:inputText id="prazoex" a:type="number" a:placeholder="Dias"/>
+                                  <label style="color: white; margin-left: 8px; align-self: center;">Dias</label>
+                              </div>
+                          </div>
+                          <input class="salvarSla" type="button" onclick="validarSla()" value="Salvar SLA" />
+                      </div>
+                  </h:form>
+              </div>
+              <h:outputScript library="default" name="js/tabelasla.js"/>
+          </ui:define>
+       </ui:composition>
+    </h:body>
+</f:view>
+</html>

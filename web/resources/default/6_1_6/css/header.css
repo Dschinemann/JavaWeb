@@ -1,0 +1,48 @@
+#header {
+    min-height     : 180px;
+    display        : flex;
+    padding        : 8px 2vw 0 8px;
+    justify-content: space-between;
+}
+
+.headerordem {
+    display        : flex;
+    padding        : 8px 2vw 0 8px;
+    align-self     : flex-end;
+}
+
+#header i {
+    font-size: 1rem;
+}
+
+#header input {
+    border-style : none;
+    font-size    : 1.2rem;
+    padding      : 5px;
+    border-bottom: 2px solid rgb(26, 24, 24);
+    outline      : none;
+    margin-left  : 5px;
+}
+
+.btn:hover {
+    background-color: rgba(30, 30, 139,0.7);
+    color           : white;
+}
+.one{
+    margin: 16px 0 0 9px;
+}
+
+.one span{
+    background-color: rgb(30, 30, 139);
+    padding: .5rem;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.one span i{
+    color           : white;
+}
+#two{
+    display: flex;
+    align-items: flex-end;
+}

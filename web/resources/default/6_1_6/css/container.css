@@ -1,0 +1,24 @@
+* {
+    padding    : 0;
+    margin     : 0;
+    font-size  : 1.5vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    background-color: rgb(231, 231, 231);
+}
+* input[type="submit"]{
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width  : 100vw;
+    height : auto;
+    padding: 0 0 0 2vw;
+}
+#one{
+    cursor: pointer;
+}
+

@@ -1,0 +1,101 @@
+.box {
+    position        : fixed;
+    width           : 100vw;
+    height          : 100vh;
+    top:0;
+    z-index         : 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    overflow: auto;
+}
+
+.box form {
+    height          : auto;
+    background-color: rgb(37, 136, 167);
+    display         : flex;
+    justify-content : center;
+    align-content   : center;
+    margin          : 20px;
+    flex-direction: column;
+}
+
+.box input[type=text] {
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border-style: none;
+    margin-right: 5px;
+}
+
+.box input[type=submit],.box input[type=button] {
+    padding         : 5px;
+    background-color: rgb(12,16,19);
+    border-radius: 5px;
+    outline: none;
+    border-style: none;
+    color: azure;
+}
+
+.box input[type=text]:hover {
+    background-color: rgba(8, 43, 43,0.5);
+    color           : white;
+    border-style    : none;
+}
+
+.box input[type=submit]:hover, .box input[type=button]:hover {
+    background-color: rgba(8, 43, 43,0.5);
+    color           : white;
+}
+
+.box table {
+    background-color: rgb(236, 234, 245);
+    border-collapse : separate;
+    border-spacing  : 2px;
+    position        : relative;
+    text-align      : left;
+    width: 100%;
+}
+
+.box table tr:nth-child(even) {
+    background-color: rgba(16, 46, 46, 0.3)
+}
+
+.box form div {
+    padding        : 2px;
+}
+
+.tablemodal td {
+    max-width: 8vw;
+    font-size: 1vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tablemodal thead tr th {
+    font-size       : 1vw;
+    background-color: turquoise;
+    padding: 7px;
+}
+
+.cntrprocura {
+    display        : flex;
+    flex-direction : column;
+    justify-content: space-between;
+}
+
+.procura {
+    display       : flex;
+    justify-content: space-between;
+}
+
+.procura div {
+    display        : flex;
+    justify-content: space-between;
+}
+
+.cntrprocura :last-child {
+    display        : flex;
+    justify-content: flex-end;
+}
+
